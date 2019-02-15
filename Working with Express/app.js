@@ -1,25 +1,20 @@
-const http = require('http')
-
+// IMPORTS AND PACKAGES
 const express = require('express')
 const bodyParser = require('body-parser')
 
+// CREATE VARIABLE FOR EXPRESS
 const app = express()
 
+// IMPORT ROUTES
+const adminRoutes = require('./routes/admin')
+const shopRoutes = require('./routes/shop')
+
+// USE PACKAGES
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use('/add-product', (req, res, next) => {
-  res.send('<form action="/product" method="post"><input type="text" name="title"><button type="submit">Add Product</button></form>')
-}),
+// USE ROUTES
+app.use(adminRoutes)
+app.use(shopRoutes)
 
-app.post('/product', (req, res, next) => {
-  console.log(req.body)
-  res.redirect('/')
-})
-
-app.use('/', (req, res, next) => {
-  res.send('<h1>Hello from Express!</h1>')
-})
-
-const server = http.createServer(app)
-
-server.listen(3000)
+// CREATE THE SERVER ON PORT 3000
+app.listen(3000)
