@@ -12,6 +12,7 @@ const shopRoutes = require('./routes/shop')
 
 // USE PACKAGES
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(express.static(path.join(__dirname, 'public')))
 
 // USE ROUTES
 app.use('/admin', adminRoutes)
